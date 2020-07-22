@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
+// import Background from './img/pnw-tree-bg.jpg';
 
 
 // import GeocodeApi from './components/Geocode'
@@ -40,12 +41,12 @@ const Main = (props) => {
     const [zipRequestStatus, setZipRequestStatus] = useState("");
 
   const handleChange = (evt) => {
-    const name = evt.target.name;
+    // const name = evt.target.name;
     const newValue = evt.target.value;
     setZipCode(newValue);
   };
 
-  const GEOCODER_API_KEY = 'AIzaSyAppkHfwhcWPm8hl7VunuoPYhQrqpK2K4E'; 
+  const GEOCODER_API_KEY = process.env.REACT_APP_GEOCODER_API_KEY; 
 
   const getLocation = () => {
     axios({
@@ -74,20 +75,29 @@ const Main = (props) => {
   };
 
   return (
-    <div>
-      <form>
-        Enter your zip code
+    <div className="bg">
+        <div className="title">
+            <span className="border">
+                What phase is it? 
+            </span>
+        </div>
+      <form className="zip-form">
+        Enter your zip code below to find out what phase of Washington State Safe start you are currently in.
+        <br />
         <input
           type="text"
           name="zipCode"
           value={zipCode}
           onChange={handleChange}
         />{" "}
+        <br />
         <a href="#" onClick={getLocation}>
-          Get Address
+          Check Zip Code
         </a>
+        <br /><br />
+        <ZipCodeResults county={county} usState={usState} zipRequestStatus={zipRequestStatus}/>
       </form>
-      <ZipCodeResults county={county} usState={usState} zipRequestStatus={zipRequestStatus}/>
+      
     </div>
   );
 };
