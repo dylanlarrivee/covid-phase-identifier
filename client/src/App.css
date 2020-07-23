@@ -3,22 +3,71 @@ body, html {
   margin: 0;
 }
 
+.wrapper {
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+  grid-gap: 10px;
+  background-color: #fff;
+  color: #444;
+  background-image: url("img/pnw-tree-bg.jpg");
+  grid-auto-rows: minmax(min-content, max-content);
+  height: 200%;
+ 
+
+  /* Full height */
+  height: 100vh; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+
+.box {
+  color: #444;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+  text-align: center;
+  
+
+}
+
 .body {
   height: 100%;
   margin: 0;
 }
 
-.bg {
+/* .bg { */
   /* The image used */
-  background-image: url("img/pnw-tree-bg.jpg");
+  /* background-image: url("img/pnw-tree-bg.jpg"); */
 
 /* Full height */
-height: 100vh; 
+/* height: 100vh;  */
 
 /* Center and scale the image nicely */
-background-position: center;
+/* background-position: center;
 background-repeat: no-repeat;
 background-size: cover;
+} */
+
+.header {
+  /* display: flex;
+  flex-wrap: nowrap;
+  justify-content: center; */
+  text-align: center;
+  top: 10%;
+  margin: 10px;
+}
+
+.header span {
+  background-color: #777;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+  border-radius: 10px;
+  display: inline-block;
 }
 
 .title {
@@ -28,7 +77,21 @@ background-size: cover;
   width: 100%;
   text-align: center;
   color: #000;
+  max-width: 100%;
+  min-width: 0;
+  margin: 10px
 }
+/* .title {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+  max-width: 100%;
+  min-width: 0;
+  margin: 10px
+} */
 
 .title span.border {
   background-color: #777;
@@ -39,11 +102,34 @@ background-size: cover;
   border-radius: 10px;
 }
 
-.zip-form {
+.zip-input {
+  padding: 16px;
+  text-align: center;
+  margin-left:auto;
+margin-right:auto;
+}
+
+input[type=text] {
+  display: block;
+  width: 100px;
+  height: 20px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  
+}
+
+/* .zip-form {
   position: absolute;
   left: 0;
   top: 20%;
   width: 100%;
   text-align: center;
   color: #000;
+  margin: 10px;
+} */
+
+.get-location:hover {
+  cursor: pointer;
 }

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
+import WaPhaseDescImg from '../img/WA_State_Phase_Details.jpg';
 // import Background from './img/pnw-tree-bg.jpg';
 
 
@@ -75,29 +76,60 @@ const Main = (props) => {
   };
 
   return (
-    <div className="bg">
-        <div className="title">
-            <span className="border">
-                What phase is it? 
-            </span>
+    <div>
+      <div className="wrapper">
+        <div className="box"></div>
+        <div className="box">
+            <form>
+            <div className="header"> 
+                <span>What phase is it?</span>
+            </div>
+            <div className="zip-input"> 
+                <label for="zipCode">Enter your zip code below to find out what phase of Washington State Safe Start you are currently in.</label>
+                <input type="text" placeholder="Enter Zip Code" name="zipCode" value={zipCode}
+            onChange={handleChange} required></input>
+             <div className="get-location" onClick={getLocation}>
+            Check Zip Code
+          </div>
+            </div>
+            </form>
         </div>
-      <form className="zip-form">
-        Enter your zip code below to find out what phase of Washington State Safe start you are currently in.
-        <br />
-        <input
-          type="text"
-          name="zipCode"
-          value={zipCode}
-          onChange={handleChange}
-        />{" "}
-        <br />
-        <a href="#" onClick={getLocation}>
-          Check Zip Code
-        </a>
-        <br /><br />
-        <ZipCodeResults county={county} usState={usState} zipRequestStatus={zipRequestStatus}/>
-      </form>
-      
+        <div className="box"></div>
+        <div className="box"></div>
+        <div className="box">
+        <ZipCodeResults
+            county={county}
+            usState={usState}
+            zipRequestStatus={zipRequestStatus}
+          />
+            <img src={WaPhaseDescImg} width="100%" height="100%"/></div>
+        <div className="box"></div>
+      </div>
+
+      {/* <div className="bg">
+        <form className="zip-form">
+          Enter your zip code below to find out what phase of Washington State
+          Safe start you are currently in.
+          <br />
+          <input
+            type="text"
+            name="zipCode"
+            value={zipCode}
+            onChange={handleChange}
+          />{" "}
+          <br />
+          <a href="#" onClick={getLocation}>
+            Check Zip Code
+          </a>
+          <br />
+          <br />
+          <ZipCodeResults
+            county={county}
+            usState={usState}
+            zipRequestStatus={zipRequestStatus}
+          />
+        </form>
+      </div> */}
     </div>
   );
 };
