@@ -38,9 +38,6 @@ body, html {
 }
 
 .header {
-  /* display: flex;
-  flex-wrap: nowrap;
-  justify-content: center; */
   text-align: center;
   top: 10%;
   margin: 10px;

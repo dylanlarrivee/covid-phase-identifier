@@ -1,43 +1,46 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import WaPhaseDescImg from '../img/WA_State_Phase_Details.jpg';
-// import Background from './img/pnw-tree-bg.jpg';
+import LoadingBar from  "./LoadingBar"
 
 
 // import GeocodeApi from './components/Geocode'
 
 const ZipCodeResults = (props) => {
-    if (props.usState === '' && props.zipRequestStatus === '') {
-        return (
-        <div>
-        </div>
-        )
-    }
-    else if (props.usState === 'WA' && props.zipRequestStatus === 'OK') {
-        return (
-            <div>
-            {props.county } County is currently in phase {props.custPhase}
-            <img className ="phase-image" src={WaPhaseDescImg} width="100%" height="100%"/>
-        </div>
-        )
-    } else if (props.zipRequestStatus !== 'OK') {
-        return (
-            <div>
-                   Please enter a valid zip code
-            </div>
-        )
-    } else {
-        return (
-            <div>
-                   Sorry, currently we only support zip codes in Washington state
-            </div>
-        )
-    }
-    
-}
+  if (props.usState === "" && props.zipRequestStatus === "") {
+    return <div></div>;
+  } else if (!props.phaseLoaded) {
+   return (
+     <div>
+       <main>
+         <LoadingBar color="#444" />
+       </main>
+     </div>
+   );
+  } else if (props.usState === "WA" && props.zipRequestStatus === "OK") {
+    return (
+      <div>
+        {props.county} County is currently in phase {props.custPhase}.
+        <img
+          className="phase-image"
+          src={WaPhaseDescImg}
+          width="100%"
+          height="100%"
+        />
+      </div>
+    );
+  } else if (props.zipRequestStatus !== "OK") {
+    return <div>Please enter a valid zip code</div>;
+  } else {
+    return (
+      <div>Sorry, currently we only support zip codes in Washington State</div>
+    );
+  }
+};
 
 const Main = (props) => {
     const [county, setCounty] = useState("");
+    const [phaseLoaded, setPhaseLoaded] = useState(false);
     const [zipCode, setZipCode] = useState("");
     const [usState, setUsState] = useState("");
     const [zipRequestStatus, setZipRequestStatus] = useState("");
@@ -80,6 +83,7 @@ const Main = (props) => {
             .then((data) => {
               console.log(JSON.stringify(data.data.custPhase));
               setCustPhase(data.data.custPhase)
+              setPhaseLoaded(true)
             })
             .catch((error) => {
               console.log(error);
@@ -127,35 +131,11 @@ const Main = (props) => {
             usState={usState}
             zipRequestStatus={zipRequestStatus}
             custPhase={custPhase}
+            phaseLoaded={phaseLoaded}
           />
         </div>
         <div className="box"></div>
       </div>
-
-      {/* <div className="bg">
-        <form className="zip-form">
-          Enter your zip code below to find out what phase of Washington State
-          Safe start you are currently in.
-          <br />
-          <input
-            type="text"
-            name="zipCode"
-            value={zipCode}
-            onChange={handleChange}
-          />{" "}
-          <br />
-          <a href="#" onClick={getLocation}>
-            Check Zip Code
-          </a>
-          <br />
-          <br />
-          <ZipCodeResults
-            county={county}
-            usState={usState}
-            zipRequestStatus={zipRequestStatus}
-          />
-        </form>
-      </div> */}
     </div>
   );
 };
