@@ -11,11 +11,10 @@ body, html {
   color: #444;
   background-image: url("img/pnw-tree-bg.jpg");
   grid-auto-rows: minmax(min-content, max-content);
-  height: 200%;
+  background-size: cover;
  
-
-  /* Full height */
-  height: 100vh; 
+  /* Min height */
+  min-height: 100vh; 
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -37,19 +36,6 @@ body, html {
   height: 100%;
   margin: 0;
 }
-
-/* .bg { */
-  /* The image used */
-  /* background-image: url("img/pnw-tree-bg.jpg"); */
-
-/* Full height */
-/* height: 100vh;  */
-
-/* Center and scale the image nicely */
-/* background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
-} */
 
 .header {
   /* display: flex;
@@ -81,17 +67,6 @@ background-size: cover;
   min-width: 0;
   margin: 10px
 }
-/* .title {
-  position: absolute;
-  left: 0;
-  top: 10%;
-  width: 100%;
-  text-align: center;
-  color: #000;
-  max-width: 100%;
-  min-width: 0;
-  margin: 10px
-} */
 
 .title span.border {
   background-color: #777;
@@ -106,30 +81,49 @@ background-size: cover;
   padding: 16px;
   text-align: center;
   margin-left:auto;
-margin-right:auto;
+  margin-right:auto;
 }
 
 input[type=text] {
   display: block;
-  width: 100px;
+  width: 140px;
   height: 20px;
-  padding: 12px 20px;
-  margin: 8px 0;
+  padding: 16px 20px;
+  margin: 15px 10px 0px 200px;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  float: left;
 }
-
-/* .zip-form {
-  position: absolute;
-  left: 0;
-  top: 20%;
-  width: 100%;
-  text-align: center;
-  color: #000;
-  margin: 10px;
-} */
 
 .get-location:hover {
   cursor: pointer;
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 15px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  float: left;
+  border-radius: 4px;
+  height: 20px;
+
+  background-color:#e7e7e7 ;
+  color: black;
+  border: 2px solid #e7e7e7;
+}
+
+.button:hover {background-color:  #779199;}
+
+.phase-image {
+  padding-top: 25px;
 }

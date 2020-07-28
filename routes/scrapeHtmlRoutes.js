@@ -7,17 +7,7 @@ const rp = require('request-promise');
 const HTMLParser = require('node-html-parser');
 
 
-// const storeStatusData = {
-//     storeStatus:true
-// }
-
-// const {
-//   StoreInfo
-// } = require("../models/storeStatusModel");
-// const StoreInfo = require("../models/storeInfoModel");
-
 router.post("/get-phase-info", (req, res) => {
-  const rp = require('request-promise');
   const url = 'https://coronavirus.wa.gov/what-you-need-know/safe-start/whats-open-each-phase'
 
 rp(url)
@@ -34,8 +24,9 @@ rp(url)
 });
 
 router.post("/get-county-status", (req, res) => {
-  const rp = require('request-promise');
   const url = 'https://coronavirus.wa.gov/what-you-need-know/county-status-and-safe-start-application-process'
+
+  const custCounty = req.body.county
 
 rp(url)
   .then(function(html){
@@ -106,9 +97,24 @@ rp(url)
         } 
       }
 
+    let custPhase = ""
 
+    if (phaseOneCountiesArray.indexOf(custCounty) != -1) {
+      custPhase = "1"
+    }  else if (phaseTwoCountiesArray.indexOf(custCounty) != -1) {
+      custPhase = "2"
+    } else if (phaseThreeCountiesArray.indexOf(custCounty) != -1) {
+      custPhase = "3"
+    } else if (phaseFourCountiesArray.indexOf(custCounty) != -1) {
+      custPhase = "4"
+    } else {
+      custPhase = "Oops we could not find the phase of that county."
+    }
 
-    res.send(phaseThreeCountiesArray);
+    console.log("custPhase", custPhase)
+
+    res.status(200).send({custPhase})
+
     // res.send(HTMLParser.parse(phaseOneCountiesArray).innerHTML);
 
   })
@@ -118,8 +124,4 @@ rp(url)
 
 });
 
-
-
-
-
-  module.exports = router;
+module.exports = router;
