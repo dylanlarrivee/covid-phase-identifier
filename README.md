@@ -36,7 +36,7 @@ To see this live in action you can click [here]().
 5. Run `npm install`.
 7. Edit the client .env file to have your Google API key with the variable: REACT_APP_GEOCODER_API_KEY.
 8. Edit the server .env file to contain the following variables: NODE_ENV, PORT and API_KEY.
-6. Push your app up to Heroku:
+9. Push your app up to Heroku:
     1. Sign up for a free Heroku account.
     2. Run `heroku local web`.
     3. Run `git add .`.
@@ -44,11 +44,7 @@ To see this live in action you can click [here]().
     5. Run `heroku login` and enter your login credentials.
     6. Run `heroku create`.
     7. Run `heroku push master`.
-8. Update the app config variables in Heroku to have the following:
-    1. POSTGRES_DB_CREDS= credentials for your Heroku PostgreSQl database. Example: me:password@localhost:5432/ss_program_stopper
-    2. riUsername= username for your Responsys account.
-    3. riPassword= password for your Responsys account.
-9. From the CLI, run `heroku open` to start your app.
-10. Enter in your z
+10. From the CLI, run `heroku open` to start your app.
+11. Enter in your z
 
 ## Screen Shots
