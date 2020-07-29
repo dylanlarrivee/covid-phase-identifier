@@ -10,3 +10,45 @@ This works by using the Google Maps API to convert your zip code to a county and
 
 React, Node, Express, Google Maps API, Cheerio for web scraping, Hosted on Heroku
 
+## Demo
+
+To see this live in action you can click [here]().
+
+## Getting Set Up
+
+### Running Locally
+
+1. Clone this repo to your local environment.
+2. cd into the covid-phase-identifier folder.
+3. Run `npm install`.
+4. cd into the client folder.
+5. Run `npm install`.
+6. cd into the covid-phase-identifier folder.
+7. Run `npm run dev` to start up the client and server and run in development mode.
+
+
+### Running on Heroku
+
+1. Clone this repo to your local environment.
+2. cd into the covid-phase-identifier folder.
+3. Run `npm install`.
+4. cd into the client folder.
+5. Run `npm install`.
+7. Edit the client .env file to have your Google API key with the variable: REACT_APP_GEOCODER_API_KEY.
+8. Edit the server .env file to contain the following variables: NODE_ENV, PORT and API_KEY.
+6. Push your app up to Heroku:
+    1. Sign up for a free Heroku account.
+    2. Run `heroku local web`.
+    3. Run `git add .`.
+    4. Run `git commit -m "commit for Heroku`.
+    5. Run `heroku login` and enter your login credentials.
+    6. Run `heroku create`.
+    7. Run `heroku push master`.
+8. Update the app config variables in Heroku to have the following:
+    1. POSTGRES_DB_CREDS= credentials for your Heroku PostgreSQl database. Example: me:password@localhost:5432/ss_program_stopper
+    2. riUsername= username for your Responsys account.
+    3. riPassword= password for your Responsys account.
+9. From the CLI, run `heroku open` to start your app.
+10. Enter in your z
+
+## Screen Shots
