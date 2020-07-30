@@ -27,6 +27,7 @@ router.post("/get-county-status", (req, res) => {
   const url = 'https://coronavirus.wa.gov/what-you-need-know/county-status-and-safe-start-application-process'
 
   const custCounty = req.body.county
+  
 
 rp(url)
   .then(function(html){

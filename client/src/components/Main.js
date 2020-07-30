@@ -55,22 +55,23 @@ const Main = (props) => {
   const GEOCODER_API_KEY = process.env.REACT_APP_GEOCODER_API_KEY; 
 
   const getLocation = () => {
+    let payload = {
+      zipCode: zipCode,
+    };
     axios({
-      url:
-        "https://maps.googleapis.com/maps/api/geocode/json?key=" +
-        GEOCODER_API_KEY +
-        "&components=postal_code:" +
-        zipCode,
-      method: "GET",
+      url:"api/get-county-from-zip",
+      method: "POST",
+      data: payload,
     })
       .then((data) => {
-        console.log("address data", JSON.stringify(data.data.status));
-        setZipRequestStatus(data.data.status);
-        if (data.data.status === "OK") {
-          const fullCounty =
-            data.data.results[0].address_components[2].long_name;
+        console.log("address data", JSON.stringify(data.data.custData.zipRequestStatus));
+
+
+        setZipRequestStatus(data.data.custData.zipRequestStatus);
+        if (data.data.custData.zipRequestStatus === "OK") {
+          const fullCounty = data.data.custData.county;
           setCounty(fullCounty.replace(" County", ""));
-          setUsState(data.data.results[0].address_components[3].short_name);
+          setUsState(data.data.custData.state);
           let county = fullCounty.replace(" County", "");
           let payload = {
             county: county,
@@ -82,12 +83,14 @@ const Main = (props) => {
           })
             .then((data) => {
               console.log(JSON.stringify(data.data.custPhase));
-              setCustPhase(data.data.custPhase)
-              setPhaseLoaded(true)
+              setCustPhase(data.data.custPhase);
+              setPhaseLoaded(true);
             })
             .catch((error) => {
               console.log(error);
             });
+        } else {
+          setPhaseLoaded(true);
         }
       })
       .catch((error) => {

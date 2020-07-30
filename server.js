@@ -11,6 +11,7 @@ var cors = require('cors');
 const PORT = (process.env.PORT || 3000);
 
 const scrapeHtmlRoutes = require("./routes/scrapeHtmlRoutes");
+const googleMapsApiRoutes = require("./routes/googleMapsApiRoutes");
 
 // mongoose.connect(process.env.MONGODB_URI, {
 //   // make pool size an environmental variable?  
@@ -76,6 +77,7 @@ app.use(morgan("tiny"));
 app.use(bodyParser.json());
 
 app.use("/api", cors(corsOptions), isAccessGranted, scrapeHtmlRoutes);
+app.use("/api", cors(corsOptions), isAccessGranted, googleMapsApiRoutes);
 
 
 console.log("running in ", process.env.NODE_ENV)
