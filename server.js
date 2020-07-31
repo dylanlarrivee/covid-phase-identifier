@@ -100,7 +100,3 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'docker') 
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
 
-// Disable both timeouts to prevent ed error (104: Connection reset by peer)
-// const server = app.listen(PORT, console.log(`Server is starting at ${PORT}`));
-// server.keepAliveTimeout = 0;
-// server.headersTimeout = 0;
