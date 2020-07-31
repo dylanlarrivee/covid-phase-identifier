@@ -7,6 +7,16 @@ import LoadingBar from  "./LoadingBar"
 // import GeocodeApi from './components/Geocode'
 
 const ZipCodeResults = (props) => {
+  const imageResize = () => {
+    let image = document.getElementById("phase-img");
+    if (document.getElementById('phase-img').className == "phase-image pop-out") {
+      image.classList.remove("pop-out");
+    } else {
+      image.classList.add("pop-out");
+    }
+
+  }
+  
   if (props.usState === "" && props.zipRequestStatus === "") {
     return <div></div>;
   } else if (!props.phaseLoaded) {
@@ -22,10 +32,12 @@ const ZipCodeResults = (props) => {
       <div>
         {props.county} County is currently in phase {props.custPhase}.
         <img
-          className="phase-image"
+          className="phase-image" 
           src={WaPhaseDescImg}
           width="100%"
           height="100%"
+          id="phase-img"
+          onClick={imageResize}
         />
       </div>
     );
