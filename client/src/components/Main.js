@@ -11,8 +11,10 @@ const ZipCodeResults = (props) => {
     let image = document.getElementById("phase-img");
     if (document.getElementById('phase-img').className == "phase-image pop-out") {
       image.classList.remove("pop-out");
+      image.classList.add("pop-in");
     } else {
       image.classList.add("pop-out");
+      image.classList.remove("pop-in");
     }
 
   }

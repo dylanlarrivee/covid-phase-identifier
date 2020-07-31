@@ -1,3 +1,9 @@
+/* * {
+  background: #000 !important;
+  color: #0f0 !important;
+  outline: solid #f00 1px !important;
+} */
+
 body, html {
   height: 100%;
   margin: 0;
@@ -85,7 +91,7 @@ body, html {
 }
 
 input[type=text] {
-  width: 140px;
+  width: 150px;
   height: 20px;
   padding: 16px 20px;
   font-size: 16px;
@@ -170,6 +176,25 @@ input[type=text] {
     transform: scale(4, 4);
   }
 
+  .wrapper {
+    display: grid;
+    grid-template-columns: 5% 90% 5%;
+    grid-gap: 10px;
+    background-color: #fff;
+    color: #444;
+    background-image: url("img/pnw-tree-bg.jpg");
+    grid-auto-rows: minmax(min-content, max-content);
+   
+    /* Min height */
+    min-height: 100vh; 
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+    }
+
 }
 
 .pop-out {
@@ -177,6 +202,13 @@ input[type=text] {
   -ms-transform: scale(2, 2);
   -webkit-transform: scale(2, 2);
   transform: scale(2, 2);
+}
+
+.pop-in {
+  transition: transform 0.5s;
+  -ms-transform: scale(1, 1);
+  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1);
 }
 
 .pop-out:hover {
