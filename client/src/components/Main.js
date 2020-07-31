@@ -52,8 +52,6 @@ const Main = (props) => {
     setZipCode(newValue);
   };
 
-  const GEOCODER_API_KEY = process.env.REACT_APP_GEOCODER_API_KEY; 
-
   const getLocation = () => {
     let payload = {
       zipCode: zipCode,
@@ -112,7 +110,11 @@ const Main = (props) => {
                 Enter your zip code below to find out what phase of Washington
                 State Safe Start you are currently in.
               </label>
-              <input
+              </div>
+              <div class="row-wrapper">
+              <div class="row">
+                <div class="column">
+                <input
                 type="text"
                 placeholder="Enter Zip Code"
                 name="zipCode"
@@ -120,10 +122,14 @@ const Main = (props) => {
                 onChange={handleChange}
                 required
               ></input>
-              <div className="button" onClick={getLocation}>
+                </div>
+                <div class="column">
+                <div className="button" onClick={getLocation}>
                 Check Zip Code
               </div>
-            </div>
+                </div>
+              </div>
+              </div>
           </form>
         </div>
         <div className="box"></div>
