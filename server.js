@@ -56,7 +56,7 @@ function isAccessGranted (req, res, next) {
 }
 
 // Handle CORS - Can add URLs to be whitelisted below as needed.
-var whitelist = ['http://localhost:8080', 'http://localhost:3000', 'http://127.0.0.1:8080', 'http://127.0.0.1:3000', 'https://covid-phase-identifier.herokuapp.com/']
+var whitelist = ['http://localhost:8080', 'http://localhost:3000', 'http://127.0.0.1:8080', 'http://127.0.0.1:3000', 'https://covid-phase-identifier.herokuapp.com']
 
 
 var corsOptions = {
