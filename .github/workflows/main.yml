@@ -4,6 +4,13 @@ on:
     branches:
       - master
 jobs:
+  test:
+    name: Run Mocha / Chai tests
+    steps:
+      - uses: actions/checkout@v1
+      - name: test
+          run: npm test
+  
   build:
     runs-on: ubuntu-latest
     steps:

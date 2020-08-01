@@ -203,14 +203,23 @@ input[type=text] {
     border-radius: 10px;
     display: inline-block;
   }
+
+  .pop-out {
+    transition: transform 0s;
+
+  }
+  
+  .pop-in {
+    transition: transform 0s;
+  }
 }
 
 
 .pop-out {
   transition: transform 0.5s;
-  -ms-transform: scale(2, 2);
-  -webkit-transform: scale(2, 2);
-  transform: scale(2, 2);
+  -ms-transform: scale(1.5, 1.5);
+  -webkit-transform: scale(1.5, 1.5);
+  transform: scale(1.5, 1.5);
 }
 
 .pop-in {
@@ -220,8 +229,8 @@ input[type=text] {
   transform: scale(1, 1);
 }
 
-.pop-out:hover {
+/* .pop-out:hover {
   -ms-transform: scale(2, 2);
   -webkit-transform: scale(2, 2);
   transform: scale(2, 2);
-}
+} */
