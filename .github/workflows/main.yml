@@ -15,3 +15,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "covid-phase-identifier" #Must be unique in Heroku
           heroku_email: "YOUR EMAIL"
+      - name: push
+          run: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/covid-phase-identifier.git master    
