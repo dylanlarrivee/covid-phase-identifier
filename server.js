@@ -98,5 +98,11 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'docker') 
   });
 }
 
-app.listen(PORT, console.log(`Server is starting at ${PORT}`));
+let server = app.listen(PORT, function () {
+  console.log(`Server is starting at ${PORT}`);
+});
+
+// app.listen(PORT, console.log(`Server is starting at ${PORT}`));
+
+module.exports = server
 

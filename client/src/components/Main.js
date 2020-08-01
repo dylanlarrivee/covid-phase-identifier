@@ -31,8 +31,8 @@ const ZipCodeResults = (props) => {
    );
   } else if (props.usState === "WA" && props.zipRequestStatus === "OK") {
     return (
-      <div>
-        {props.county} County is currently in phase {props.custPhase}.
+      <div className="response-copy">
+        <span>{props.county} County is currently in phase {props.custPhase}.</span>
         <img
           className="phase-image" 
           src={WaPhaseDescImg}

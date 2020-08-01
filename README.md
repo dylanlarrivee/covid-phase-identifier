@@ -8,7 +8,7 @@ This works by using the Google Maps API to convert your zip code to a county and
 
 ## Technologies used
 
-React, Node, Express, Google Maps API, Cheerio for web scraping, Hosted on Heroku
+React, Node, Express, Google Maps API, Cheerio for web scraping, Mocha for unit testing and hosted on Heroku
 
 ## Demo
 
