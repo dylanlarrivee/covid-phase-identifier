@@ -181,30 +181,30 @@ input[type=text] {
     grid-gap: 10px;
     background-color: #fff;
     color: #444;
-    background-image: url("img/pnw-tree-bg.jpg");
+    background-image: url('img/pnw-tree-bg.jpg');
     grid-auto-rows: minmax(min-content, max-content);
-   
+
     /* Min height */
-    min-height: 100vh; 
-  
+    min-height: 100vh;
+
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     overflow-x: hidden;
-    }
+  }
 
-    .response-copy span {
-      background-color: #777;
-      color: #fff;
-      padding: 18px;
-      font-size: 25px;
-      letter-spacing: 10px;
-      border-radius: 10px;
-      display: inline-block;
-    }
-
+  .response-copy span {
+    background-color: #777;
+    color: #fff;
+    padding: 18px;
+    font-size: 15px;
+    letter-spacing: 10px;
+    border-radius: 10px;
+    display: inline-block;
+  }
 }
+
 
 .pop-out {
   transition: transform 0.5s;
