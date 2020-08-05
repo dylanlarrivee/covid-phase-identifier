@@ -7,10 +7,8 @@ require('dotenv').config()
 const GEOCODER_API_KEY = process.env.GEOCODER_API_KEY; 
 
 router.post("/get-county-from-zip", (req, res) => {
-  const url = 'https://coronavirus.wa.gov/what-you-need-know/safe-start/whats-open-each-phase'
-   
   const custData = {
-      zipCode:req.body.zipCode,
+      zipCode:req.query.zipcode,
       county: "",
       state: "",
       zipRequestStatus: ""

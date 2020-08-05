@@ -33,6 +33,7 @@
     "nodemon": "^2.0.2",
     "puppeteer": "^5.1.0",
     "react-router-dom": "^5.1.2",
+    "redis": "^3.0.2",
     "request": "^2.88.2",
     "request-promise": "^4.2.5"
   },

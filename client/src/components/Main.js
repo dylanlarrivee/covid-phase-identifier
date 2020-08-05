@@ -7,6 +7,7 @@ import LoadingBar from  "./LoadingBar"
 // import GeocodeApi from './components/Geocode'
 
 const ZipCodeResults = (props) => {
+  
   const imageResize = () => {
     let image = document.getElementById("phase-img");
     if (document.getElementById('phase-img').className == "phase-image pop-out") {
@@ -32,7 +33,7 @@ const ZipCodeResults = (props) => {
   } else if (props.usState === "WA" && props.zipRequestStatus === "OK") {
     return (
       <div className="response-copy">
-        <span>{props.county} County is currently in <b>Phase {props.custPhase}.</b></span>
+        <span>{props.county} County is currently in <b></b></span>
         <img
           className="phase-image" 
           src={WaPhaseDescImg}
@@ -71,9 +72,8 @@ const Main = (props) => {
       zipCode: zipCode,
     };
     axios({
-      url:"api/get-county-from-zip",
-      method: "POST",
-      data: payload,
+      url:"api/get-county-from-zip?zipcode=" + zipCode,
+      method: "POST"
     })
       .then((data) => {
         console.log("address data", JSON.stringify(data.data.custData.zipRequestStatus));
@@ -125,9 +125,9 @@ const Main = (props) => {
                 State Safe Start you are currently in.
               </label>
               </div>
-              <div class="row-wrapper">
-              <div class="row">
-                <div class="column">
+              <div className="row-wrapper">
+              <div className="row">
+                <div className="column">
                 <input
                 type="text"
                 placeholder="Enter Zip Code"
@@ -137,7 +137,7 @@ const Main = (props) => {
                 required
               ></input>
                 </div>
-                <div class="column">
+                <div className="column">
                 <div className="button" onClick={getLocation}>
                 Check Zip Code
               </div>
