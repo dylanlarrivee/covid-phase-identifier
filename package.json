@@ -10,7 +10,7 @@
     "heroku-postbuild": "npm run install-client && npm run build",
     "start": "node server.js",
     "client": "cd client && npm start",
-    "dev": "concurrently -n 'server,client' -c 'green,blue' \"nodemon server.js\" \"npm run client\""
+    "dev": "concurrently -n 'redis,server,client' -c 'purple,green,blue'  \"redis-server\" \"nodemon server.js\" \"npm run client\""
   },
   "author": "Dylan Larrivee",
   "license": "ISC",

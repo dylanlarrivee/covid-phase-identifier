@@ -4,35 +4,21 @@ const morgan = require("morgan");
 const path = require("path");
 const bodyParser = require('body-parser');
 const fs = require('file-system');
+const redis = require("redis");
 require('dotenv').config()
 
 const app = express();
 var cors = require('cors');
+
+//setup port constants
+const port_redis = process.env.REDIS_PORT || 6379;
 const PORT = (process.env.PORT || 3000);
+
+//configure redis client on port 6379
+const redis_client = redis.createClient(port_redis);
 
 const scrapeHtmlRoutes = require("./routes/scrapeHtmlRoutes");
 const googleMapsApiRoutes = require("./routes/googleMapsApiRoutes");
-
-// mongoose.connect(process.env.MONGODB_URI, {
-//   // make pool size an environmental variable?  
-//   poolSize: process.env.MONGO_POOLSIZE,
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useFindAndModify: false,
-//   useCreateIndex: true,
-//   sslValidate: false,
-//   sslCA: fs.readFileSync('./database-scripts/rds-combined-ca-bundle.pem')
-// })
-//   .then(() => {
-//     console.log("Mongoose is connected");
-//   })
-//   .catch((error) => {
-//   console.log("Mongoose Connection Error: ", error);
-// });
-
-// mongoose.connection.on("connected", () => {
-//   console.log("Mongoose is connected");
-// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
