@@ -14,8 +14,13 @@ var cors = require('cors');
 const port_redis = process.env.REDIS_PORT || 6379;
 const PORT = (process.env.PORT || 3000);
 
+if (process.env.NODE_ENV === 'production') {
+// COnfigure using the REDIS_URL
+const redis_client = redis.createClient(process.env.REDIS_URL);
+} else {
 //configure redis client on port 6379
 const redis_client = redis.createClient(port_redis);
+}
 
 const scrapeHtmlRoutes = require("./routes/scrapeHtmlRoutes");
 const googleMapsApiRoutes = require("./routes/googleMapsApiRoutes");
@@ -42,7 +47,7 @@ function isAccessGranted (req, res, next) {
 }
 
 // Handle CORS - Can add URLs to be whitelisted below as needed.
-var whitelist = ['http://localhost:8080', 'http://localhost:3000', 'http://127.0.0.1:8080', 'http://127.0.0.1:3000', 'https://covid-phase-identifier.herokuapp.com']
+var whitelist = ['http://localhost:8080', 'http://localhost:3000', 'http://127.0.0.1:8080', 'http://127.0.0.1:3000', 'https://covid-phase-identifier.herokuapp.com', "https://covid-phase-identifier-dev.herokuapp.com/"]
 
 
 var corsOptions = {
