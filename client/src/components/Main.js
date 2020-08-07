@@ -30,10 +30,10 @@ const ZipCodeResults = (props) => {
        </main>
      </div>
    );
-  } else if (props.usState === "WA" && props.zipRequestStatus === "OK") {
+  } else if (props.usState === "WA" && props.zipRequestStatus === "OK" && props.custPhase) {
     return (
       <div className="response-copy">
-        <span>{props.county} County is currently in <b></b></span>
+        <span>{props.county} County is currently in phase {props.custPhase}.<b></b></span>
         <img
           className="phase-image" 
           src={WaPhaseDescImg}
@@ -76,9 +76,7 @@ const Main = (props) => {
       method: "POST"
     })
       .then((data) => {
-        console.log("address data", JSON.stringify(data.data.custData.zipRequestStatus));
-
-
+        console.log("address data", JSON.stringify(data));
         setZipRequestStatus(data.data.custData.zipRequestStatus);
         if (data.data.custData.zipRequestStatus === "OK") {
           const fullCounty = data.data.custData.county;
@@ -114,7 +112,7 @@ const Main = (props) => {
     <div>
       <div className="wrapper">
         <div className="box"></div>
-        <div className="box">
+        <div className="box"> 
           <form>
             <div className="header">
               <span>What phase is it?</span>

@@ -6,13 +6,16 @@ const axios = require('axios');
 const redis = require("redis");
 const port_redis = process.env.REDIS_PORT || 6379;
 
+const redisData = {
+  redis_client: ""
+}
 
 if (process.env.NODE_ENV === 'production') {
   // COnfigure using the REDIS_URL
-  const redis_client = redis.createClient(process.env.REDIS_URL);
+  redisData.redis_client = redis.createClient(process.env.REDIS_URL);
   } else {
   //configure redis client on port 6379
-  const redis_client = redis.createClient(port_redis);
+  redisData.redis_client = redis.createClient(port_redis);
   }
 
 require('dotenv').config()
@@ -41,7 +44,7 @@ router.post("/get-county-from-zip", (req, res) => {
         custData.state = data.data.results[0].address_components[3].short_name; 
       }
       //add data to Redis
-        redis_client.setex(custData.zipCode, 3600, JSON.stringify(custData));
+      redisData.redis_client.setex(custData.zipCode, 3600, JSON.stringify(custData));
         res.status(200).send({custData})
         })
     .catch((error) => {

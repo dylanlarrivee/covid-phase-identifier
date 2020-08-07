@@ -14,12 +14,17 @@ var cors = require('cors');
 const port_redis = process.env.REDIS_PORT || 6379;
 const PORT = (process.env.PORT || 3000);
 
+
+const redisData = {
+  redis_client: ""
+}
+
 if (process.env.NODE_ENV === 'production') {
 // COnfigure using the REDIS_URL
-const redis_client = redis.createClient(process.env.REDIS_URL);
+redisData.redis_client = redis.createClient(process.env.REDIS_URL);
 } else {
 //configure redis client on port 6379
-const redis_client = redis.createClient(port_redis);
+redisData.redis_client = redis.createClient(port_redis);
 }
 
 const scrapeHtmlRoutes = require("./routes/scrapeHtmlRoutes");
@@ -30,14 +35,18 @@ app.use(express.urlencoded({ extended: false }));
 
 //Middleware Function to Check Cache from Redis
 checkCache = (req, res, next) => {
-  const { id } = req.params;
-
-  redis_client.get(id, (err, data) => {
+  const  id  = req.query.zipcode;
+  console.log ("id", id)
+  redisData.redis_client.get(id, (err, checkCacheData) => {
     if (err) {
       console.log(err);
       res.status(500).send(err);
     }
-    if (data != null) {
+    if (checkCacheData != null) {
+      const data = {
+        "custData":JSON.parse(checkCacheData)
+      }
+      console.log("redischeckCacheData:", data)
       res.send(data);
     } else {
       next();
@@ -86,7 +95,7 @@ app.use(morgan("tiny"));
 app.use(bodyParser.json());
 
 app.use("/api", cors(corsOptions), isAccessGranted, scrapeHtmlRoutes);
-app.use("/api", cors(corsOptions), isAccessGranted, googleMapsApiRoutes);
+app.use("/api", cors(corsOptions), isAccessGranted, checkCache, googleMapsApiRoutes);
 
 
 console.log("running in ", process.env.NODE_ENV)
