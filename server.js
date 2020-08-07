@@ -28,6 +28,24 @@ const googleMapsApiRoutes = require("./routes/googleMapsApiRoutes");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+//Middleware Function to Check Cache from Redis
+checkCache = (req, res, next) => {
+  const { id } = req.params;
+
+  redis_client.get(id, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+    if (data != null) {
+      res.send(data);
+    } else {
+      next();
+    }
+  });
+};
+
+
 // If the request is not coming from a browser we need an API key for security
 function isAccessGranted (req, res, next) {
   // console.log(req.headers)

@@ -5,7 +5,15 @@ const axios = require('axios');
 
 const redis = require("redis");
 const port_redis = process.env.REDIS_PORT || 6379;
-const redis_client = redis.createClient(port_redis);
+
+
+if (process.env.NODE_ENV === 'production') {
+  // COnfigure using the REDIS_URL
+  const redis_client = redis.createClient(process.env.REDIS_URL);
+  } else {
+  //configure redis client on port 6379
+  const redis_client = redis.createClient(port_redis);
+  }
 
 require('dotenv').config()
 
