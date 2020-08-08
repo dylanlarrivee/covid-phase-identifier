@@ -1,0 +1,30 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  test:
+    name: Test on node ${{ matrix.node }} and ${{ matrix.os }}
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node: [8, 10, 12]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v1
+      - name: test
+        run: npm test
+  
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.0.0
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY_DEV}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME_DEV}}
+          heroku_email: "dylanlarrivee@gmail.com"
+          usedocker: false
