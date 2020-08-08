@@ -1,16 +1,15 @@
+"use strict";
 const express = require("express");
-const mongoose = require("mongoose");
 const morgan = require("morgan");
 const path = require("path");
 const bodyParser = require('body-parser');
-const fs = require('file-system');
 const redis = require("redis");
 require('dotenv').config()
 
 const app = express();
 var cors = require('cors');
 
-//setup port constants
+//set up port constants
 const port_redis = process.env.REDIS_PORT || 6379;
 const PORT = (process.env.PORT || 3000);
 
