@@ -11,7 +11,7 @@ const redisData = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  // COnfigure using the REDIS_URL
+  // Configure using the REDIS_URL
   redisData.redis_client = redis.createClient(process.env.REDIS_URL);
   } else {
   //configure redis client on port 6379
