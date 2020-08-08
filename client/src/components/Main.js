@@ -17,9 +17,7 @@ const ZipCodeResults = (props) => {
       image.classList.add("pop-out");
       image.classList.remove("pop-in");
     }
-
-  }
-  
+  }  
   if (props.usState === "" && props.zipRequestStatus === "") {
     return <div></div>;
   } else if (!props.phaseLoaded) {
@@ -76,7 +74,7 @@ const Main = (props) => {
       method: "POST"
     })
       .then((data) => {
-        console.log("address data", JSON.stringify(data));
+       // console.log("address data", JSON.stringify(data));
         setZipRequestStatus(data.data.custData.zipRequestStatus);
         if (data.data.custData.zipRequestStatus === "OK") {
           const fullCounty = data.data.custData.county;
@@ -92,7 +90,7 @@ const Main = (props) => {
             data: payload,
           })
             .then((data) => {
-              console.log(JSON.stringify(data.data.custPhase));
+            //  console.log(JSON.stringify(data.data.custPhase));
               setCustPhase(data.data.custPhase);
               setPhaseLoaded(true);
             })
