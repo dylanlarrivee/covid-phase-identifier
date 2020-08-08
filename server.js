@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //Middleware Function to Check Cache from Redis
-checkCache = (req, res, next) => {
+function checkCache (req, res, next) {
   const  id  = req.query.zipcode;
   console.log ("id", id)
   redisData.redis_client.get(id, (err, checkCacheData) => {
