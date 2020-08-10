@@ -32,10 +32,10 @@ const googleMapsApiRoutes = require("./routes/googleMapsApiRoutes");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//Middleware Function to Check Cache from Redis
-function checkCache (req, res, next) {
+//Middleware Function to Check Cache from Redis for Google API routes
+function googleMapsCheckCache (req, res, next) {
   const  id  = req.query.zipcode;
-  console.log ("id", id)
+  console.log ("googleMapsCheckCache id", id)
   redisData.redis_client.get(id, (err, checkCacheData) => {
     if (err) {
       console.log(err);
@@ -47,6 +47,24 @@ function checkCache (req, res, next) {
       }
       console.log("redischeckCacheData:", data)
       res.send(data);
+    } else {
+      next();
+    }
+  });
+};
+
+//Middleware Function to Check Cache from Redis for county status routes
+function countyPhaseCheckCache (req, res, next) {
+  const  id  = req.query.county;
+  console.log ("countyPhaseCheckCache id", id)
+  redisData.redis_client.get(id, (err, checkCacheData) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+    if (checkCacheData != null) {
+      console.log("redischeckCacheData:", checkCacheData)
+      res.send(checkCacheData);
     } else {
       next();
     }
@@ -93,8 +111,8 @@ app.use(morgan("tiny"));
 // Body parser
 app.use(bodyParser.json());
 
-app.use("/api", cors(corsOptions), isAccessGranted, scrapeHtmlRoutes);
-app.use("/api", cors(corsOptions), isAccessGranted, checkCache, googleMapsApiRoutes);
+app.use("/api", cors(corsOptions), isAccessGranted, countyPhaseCheckCache, scrapeHtmlRoutes);
+app.use("/api", cors(corsOptions), isAccessGranted, googleMapsCheckCache, googleMapsApiRoutes);
 
 
 console.log("running in ", process.env.NODE_ENV)

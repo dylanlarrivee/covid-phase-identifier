@@ -85,7 +85,7 @@ const Main = (props) => {
             county: county,
           };
           axios({
-            url: "/api/get-county-status",
+            url: "/api/get-county-status?county=" + county,
             method: "POST",
             data: payload,
           })
