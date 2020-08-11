@@ -96,8 +96,8 @@ const Main = (props) => {
             data: payload,
           })
             .then((data) => {
-              //  console.log(JSON.stringify(data.data.custPhase));
-              setCustPhase(data.data.custPhase);
+              console.log(JSON.stringify(data.data.phase));
+              setCustPhase(data.data.phase);
               setPhaseLoaded(true);
             })
             .catch((error) => {

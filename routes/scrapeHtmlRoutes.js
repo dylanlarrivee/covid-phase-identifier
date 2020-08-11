@@ -121,7 +121,7 @@ rp(url)
 
     console.log("custPhase", custPhase)
     redisData.redis_client.setex(custCounty, 3600, JSON.stringify(custPhase));
-    res.status(200).send({custPhase})
+    res.status(200).send({"phase":custPhase})
 
     // res.send(HTMLParser.parse(phaseOneCountiesArray).innerHTML);
 
