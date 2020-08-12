@@ -23,7 +23,7 @@ describe("Covid Phase Identifier Tests", function () {
             .end((err, res) => {
                   res.should.have.status(200);
                   res.body.should.be.a('object');
-                  res.body.custData.zipCode.should.equal("98005");
+                  res.body.custData.zipCode.should.equal("980053");
                   // res.body.should.have.property('errors');
                   // res.body.errors.should.have.property('pages');
                   // res.body.errors.pages.should.have.property('kind').eql('required');
