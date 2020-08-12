@@ -1,5 +1,6 @@
 //During the test the env variable is set to test
-// process.env.NODE_ENV = 'test';
+// npm run test --production
+process.env.NODE_ENV = 'production';
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
