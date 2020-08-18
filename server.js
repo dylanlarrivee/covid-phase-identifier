@@ -9,7 +9,7 @@ require('dotenv').config();
 const app = express();
 var cors = require('cors');
 
-//set up port constants
+//set up port constants --
 const port_redis = process.env.REDIS_PORT || 6379;
 const PORT = (process.env.PORT || 3000);
 
