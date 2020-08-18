@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const path = require("path");
 const bodyParser = require('body-parser');
 const redis = require("redis");
-require('dotenv').config()
+require('dotenv').config();
 
 const app = express();
 var cors = require('cors');
