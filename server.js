@@ -11,7 +11,7 @@ var cors = require('cors');
 
 //set up port constants --
 const port_redis = process.env.REDIS_PORT || 6379;
-const PORT = (process.env.PORT || 3000);
+const PORT = (process.env.PORT || 8080);
 
 
 const redisData = {
