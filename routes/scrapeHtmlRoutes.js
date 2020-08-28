@@ -44,11 +44,10 @@ rp(url)
     // console.log(root.querySelector('.field--name-field-body-no-summary'));
     let countyBodyHtml = root.querySelector('.field--name-field-body-no-summary').toString();
     // res.send(countyBodyHtml);
-    const phaseOneCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[1];
-    let phaseTwoCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[2];
-    let phaseThreeCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[3];
-    let phaseFourCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[4];
-    
+    const phaseOneCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[0];
+    let phaseTwoCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[1];
+    let phaseThreeCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[2];
+    let phaseFourCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[3];
     // Split up and push to array the phase one counties
     const phaseOneCountiesSplit = phaseOneCounties.split('<li>');
     const phaseOneCountiesArray = [];

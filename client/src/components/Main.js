@@ -50,7 +50,9 @@ const ZipCodeResults = (props) => {
     );
   } else if (props.zipRequestStatus !== "OK") {
     return <div>Please enter a valid zip code</div>;
-  } else {
+  } else if (!props.custPhase) {
+    return <div>Sorry, there seems to have been an update to the website and we are currently updating our web scrapper.</div>;
+  }else {
     return (
       <div>Sorry, currently we only support zip codes in Washington State</div>
     );
