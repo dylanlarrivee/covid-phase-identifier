@@ -5,18 +5,21 @@ on:
       - develop
 jobs:
   test:
-    name: Test on node ${{ matrix.node }} and ${{ matrix.os }}
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node: [8, 10, 12]
-        os: [ubuntu-latest, macOS-latest, windows-latest]
+        node-version: [ 10, 12, 14]
+
     steps:
-      - uses: actions/checkout@v1
-      - name: test
-        run: npm test
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - run: npm test
   
   build:
     runs-on: ubuntu-latest

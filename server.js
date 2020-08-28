@@ -4,14 +4,14 @@ const morgan = require("morgan");
 const path = require("path");
 const bodyParser = require('body-parser');
 const redis = require("redis");
-require('dotenv').config()
+require('dotenv').config();
 
 const app = express();
 var cors = require('cors');
 
-//set up port constants
+//set up port constants --
 const port_redis = process.env.REDIS_PORT || 6379;
-const PORT = (process.env.PORT || 3000);
+const PORT = (process.env.PORT || 8080);
 
 
 const redisData = {
@@ -32,10 +32,10 @@ const googleMapsApiRoutes = require("./routes/googleMapsApiRoutes");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//Middleware Function to Check Cache from Redis
-function checkCache (req, res, next) {
+//Middleware Function to Check Cache from Redis for Google API routes
+function googleMapsCheckCache (req, res, next) {
   const  id  = req.query.zipcode;
-  console.log ("id", id)
+  console.log ("googleMapsCheckCache id", id)
   redisData.redis_client.get(id, (err, checkCacheData) => {
     if (err) {
       console.log(err);
@@ -52,6 +52,24 @@ function checkCache (req, res, next) {
     }
   });
 };
+
+//Middleware Function to Check Cache from Redis for county status routes
+// function countyPhaseCheckCache (req, res, next) {
+//   const  id  = req.query.county;
+//   console.log ("countyPhaseCheckCache id", id)
+//   redisData.redis_client.get(id, (err, checkCacheData) => {
+//     if (err) {
+//       console.log(err);
+//       res.status(500).send(err);
+//     }
+//     if (checkCacheData != null) {
+//       console.log("redischeckCacheData:", checkCacheData)
+//       res.send(checkCacheData);
+//     } else {
+//       next();
+//     }
+//   });
+// };
 
 
 // If the request is not coming from a browser we need an API key for security
@@ -94,7 +112,7 @@ app.use(morgan("tiny"));
 app.use(bodyParser.json());
 
 app.use("/api", cors(corsOptions), isAccessGranted, scrapeHtmlRoutes);
-app.use("/api", cors(corsOptions), isAccessGranted, checkCache, googleMapsApiRoutes);
+app.use("/api", cors(corsOptions), isAccessGranted, googleMapsCheckCache, googleMapsApiRoutes);
 
 
 console.log("running in ", process.env.NODE_ENV)

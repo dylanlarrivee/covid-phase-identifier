@@ -23,7 +23,7 @@ require('dotenv').config()
 const GEOCODER_API_KEY = process.env.GEOCODER_API_KEY; 
 
 router.post("/get-county-from-zip", (req, res) => {
-  
+console.log()
   const custData = {
       zipCode:req.query.zipcode,
       county: "",

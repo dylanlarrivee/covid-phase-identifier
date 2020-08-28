@@ -1,10 +1,22 @@
 "use strict";
 const express = require("express");
 const router = express.Router();
-
 const rp = require('request-promise');
-
 const HTMLParser = require('node-html-parser');
+const redis = require("redis");
+const port_redis = process.env.REDIS_PORT || 6379;
+
+const redisData = {
+  redis_client: ""
+}
+
+if (process.env.NODE_ENV === 'production') {
+  // Configure using the REDIS_URL
+  redisData.redis_client = redis.createClient(process.env.REDIS_URL);
+  } else {
+  //configure redis client on port 6379
+  redisData.redis_client = redis.createClient(port_redis);
+  }
 
 
 router.post("/get-phase-info", (req, res) => {
@@ -12,36 +24,30 @@ router.post("/get-phase-info", (req, res) => {
 
 rp(url)
   .then(function(html){
-    //success!
-   // console.log(html);
     res.send(html);
     let root = HTMLParser.parse(html);
   })
   .catch(function(err){
-    //handle error
   });
 
 });
 
+// Change to a params to do route caching?
 router.post("/get-county-status", (req, res) => {
   const url = 'https://coronavirus.wa.gov/what-you-need-know/county-status-and-safe-start-application-process'
 
-  const custCounty = req.body.county
-  
+  const custCounty = req.query.county
 
 rp(url)
   .then(function(html){
-    //success!
-   // console.log(html);
     let root = HTMLParser.parse(html);
     // console.log(root.querySelector('.field--name-field-body-no-summary'));
     let countyBodyHtml = root.querySelector('.field--name-field-body-no-summary').toString();
     // res.send(countyBodyHtml);
-    const phaseOneCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[1];
-    let phaseTwoCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[2];
-    let phaseThreeCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[3];
-    let phaseFourCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[4];
-    
+    const phaseOneCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[0];
+    let phaseTwoCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[1];
+    let phaseThreeCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[2];
+    let phaseFourCounties = countyBodyHtml.split('<a href="/node/2128#Phase')[3];
     // Split up and push to array the phase one counties
     const phaseOneCountiesSplit = phaseOneCounties.split('<li>');
     const phaseOneCountiesArray = [];
@@ -113,8 +119,8 @@ rp(url)
     }
 
     console.log("custPhase", custPhase)
-
-    res.status(200).send({custPhase})
+    redisData.redis_client.setex(custCounty, 3600, JSON.stringify(custPhase));
+    res.status(200).send({"phase":custPhase})
 
     // res.send(HTMLParser.parse(phaseOneCountiesArray).innerHTML);
 
