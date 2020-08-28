@@ -1,3 +1,35 @@
+# name: Deploy
+# on:
+#   push:
+#     branches:
+#       - master
+# jobs:
+#   test:
+#     name: Test on node ${{ matrix.node }} and ${{ matrix.os }}
+
+#     runs-on: ${{ matrix.os }}
+
+#     strategy:
+#       matrix:
+#         node: [10, 12, 14]
+#         os: [ubuntu-latest, macOS-latest, windows-latest]
+#     steps:
+#       - uses: actions/checkout@v1
+#       - name: test
+#         run: npm install
+#         run: npm test
+  
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: akhileshns/heroku-deploy@v3.0.0
+#         with:
+#           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+#           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+#           heroku_email: "dylanlarrivee@gmail.com"
+#           usedocker: false
+
 name: Deploy
 on:
   push:
@@ -5,19 +37,21 @@ on:
       - master
 jobs:
   test:
-    name: Test on node ${{ matrix.node }} and ${{ matrix.os }}
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node: [10, 12, 14]
-        os: [ubuntu-latest, macOS-latest, windows-latest]
+        node-version: [ 10, 12, 14]
+
     steps:
-      - uses: actions/checkout@v1
-      - name: test
-        run: npm install
-        run: npm test
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - run: npm test
   
   build:
     runs-on: ubuntu-latest
@@ -29,4 +63,3 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: "dylanlarrivee@gmail.com"
           usedocker: false
-
