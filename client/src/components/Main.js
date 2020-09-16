@@ -49,12 +49,27 @@ const ZipCodeResults = (props) => {
       </div>
     );
   } else if (props.zipRequestStatus !== "OK") {
-    return <div>Please enter a valid zip code</div>;
-  } else if (!props.custPhase) {
-    return <div>Sorry, there seems to have been an update to the website and we are currently updating our web scrapper.</div>;
-  }else {
     return (
-      <div>Sorry, currently we only support zip codes in Washington State</div>
+      <div className="response-copy">
+        <span>Please enter a valid zip code</span>
+      </div>
+    );
+  } else if (!props.custPhase) {
+    return (
+      <div className="response-copy">
+        <span>
+          Sorry, there seems to have been an update to the website and we are
+          currently updating our web scrapper.
+        </span>
+      </div>
+    );
+  } else {
+    return (
+      <div className="response-copy">
+        <span>
+          Sorry, currently we only support zip codes in Washington State
+        </span>
+      </div>
     );
   }
 };
