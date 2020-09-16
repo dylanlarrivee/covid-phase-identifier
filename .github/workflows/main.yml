@@ -57,6 +57,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Deploy to Heroku
+    - uses: actions/checkout@v2
+    - uses: akhileshns/heroku-deploy@v3.4.6 # This is the action
       env:
         HEROKU_API_TOKEN: ${{secrets.HEROKU_API_KEY}}
         HEROKU_APP_NAME: ${{secrets.HEROKU_APP_NAME}}
